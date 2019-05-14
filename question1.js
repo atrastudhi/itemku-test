@@ -20,6 +20,7 @@ function solution(record) {
     }
 
     if (splited[0] === 'Leave') {
+      
       temp.forEach(e => {
         if (e.uid === splited[1]) {
           temp.push({
@@ -32,11 +33,24 @@ function solution(record) {
     }
 
     if (splited[0] === 'Change') {
-      for (let i = 0; i < temp.length; i++) {
-        if (temp[i].uid === splited[1]) {
-          temp[i].username = splited[2]
+      let check = false;
+      temp.forEach(i => {
+        if (i.uid === splited[1]) {
+          if (i.word === 'has left.') {
+            check = false;
+          } else if (i.word === 'came in.') {
+            check = true;
+          }
         }
-      };
+      });
+      console.log(check, splited)
+      if (check) {
+        for (let i = 0; i < temp.length; i++) {
+          if (temp[i].uid === splited[1]) {
+            temp[i].username = splited[2];
+          }
+        };
+      }
     }
   });
 
